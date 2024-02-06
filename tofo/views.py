@@ -5,8 +5,11 @@ from .models import Task
 def index(request):
     tasks=Task.objects.all()
     context={
-        'tasks':tasks
-    }
+        'tasks':tasks,
+        "total_tasks":tasks.count(),
+        "tasks_completed":tasks.filter(status=True).count(),
+        "tasks_incompleted":tasks.filter(status=False).count()
+            }
     return render(request,'index.html',context)
 
 def contact(request):

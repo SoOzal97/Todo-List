@@ -3,16 +3,24 @@
 {% block title %} Home {% endblock title %}
 
 
-{% block body %}Home
+{% block body %}
+<span>Total Tasks= {{total_tasks}}</span>
+<br>
+<span>Tasks completed= {{tasks_completed}}</span>
+<br>
+<span>Total incompleted= {{tasks_incompleted}}</span>
+<br>
 <div class="container"></div>
+
+
 <h1>Todo list</h1>
 <table class="table">
     <thead>
         <tr>
-        <th scope="col">#</th>
-        <th scope="col">title</th>
-        <th scope="col">description</th>
-        <th scope="col">status</th>
+        <th scope="col">S.N</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
         <th scope="col">Action</th>
         </tr>
     </thead>
