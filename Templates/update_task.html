@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Create task
+Update task
 {% endblock title %}
 {% block body %}
 
@@ -11,7 +11,7 @@ Create task
   {{error}}
 </div>{% endif %}
 
-<form action="/create-task" method='POST'> 
+<form action="/task/{{task.id}}/edit" method='POST'> 
 
     {% csrf_token %}
     <div class="mb-3">

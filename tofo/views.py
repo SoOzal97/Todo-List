@@ -30,15 +30,32 @@ def create_task(request):
  
 def update_task(request,pk):
     task=Task.objects.get(pk=pk)
-    task.title=request.get('title')
-    task.description=request.get('description')
-    task.save()
-    
     context={
         'task':task
     }
-    return render(request,'update_task.html',context)
     
+    if request.method == "POST":
+        title= request.POST.get('title')
+        description= request.POST.get('description')
+        
+        if title == '' and description == '':
+            context ={
+                'error': 'Both fields are required'
+            }
+            return render(request,'create_task.html',context)
+        task.title=title
+        task.description=description
+        task.status=False
+        task.save()
+        return redirect("/")      
+    return render(request,'update_task.html',context)
+
+
+def delete_task(request,pk):
+    task=Task.objects.get(pk=pk)
+    task.delete()
+    return redirect('/')
+
 
 def mark_as_completed(request,pk):
     task=Task.objects.get(pk=pk)
@@ -48,8 +65,8 @@ def mark_as_completed(request,pk):
 
 
 
-def mark_as_uncompleted(request,pk):
-    task=Task.objects.get(pk=pk)
-    task.status=True
-    task.delete()
-    return redirect('/')
+# def mark_as_uncompleted(request,pk):
+#     task=Task.objects.get(pk=pk)
+#     task.status=True
+#     task.delete()
+#     return redirect('/')
