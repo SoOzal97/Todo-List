@@ -30,6 +30,9 @@ def create_task(request):
  
 def update_task(request,pk):
     task=Task.objects.get(pk=pk)
+    task.title=request.get('title')
+    task.description=request.get('description')
+    task.save()
     
     context={
         'task':task
